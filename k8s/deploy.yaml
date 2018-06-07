@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: bluegreen
-        image: private-docker-registry:5000/bluegreen:0.0.1
+        image: yoon5/bluegreen:0.0.1
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
