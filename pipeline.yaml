@@ -9,10 +9,10 @@ build:
 
 Build Docker image:
 - docker:
-  - docker build -t private-docker-registry:5000/bluegreen-0.0.1 . &&
+  - docker build -t private-docker-registry:5000/bluegreen:0.0.1 . &&
   - docker images &&
 #  - docker login ${} -u ${} -p${}
-  - docker push private-docker-registry:5000/bluegreen-0.0.1
+  - docker push private-docker-registry:5000/bluegreen:0.0.1
 
 #deploy:
 #- kubectl:
