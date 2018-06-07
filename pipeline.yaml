@@ -12,7 +12,7 @@ stage:
 Build Docker image:
 - docker:
 #  - docker login -u *** -p ***
-  - echo ${image}
+  - echo ${image_url}
   - docker build -t $image:$version .
   - docker images
 #  - docker push yoon5/bluegreen:0.0.2
