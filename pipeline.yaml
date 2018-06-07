@@ -13,7 +13,7 @@ Build Docker image:
 - docker:
 #  - docker login -u *** -p ***
   - echo ${image}
-  - docker build -t $image .
+  - docker build -t $image:$version .
   - docker images
 #  - docker push yoon5/bluegreen:0.0.2
 #  - docker build -t private-docker-registry:5000/bluegreen:0.0.1 . &&
@@ -33,6 +33,7 @@ agent:
       readOnly: false
 
 env:
-  image: yoon5/bluegreen:$version
+  image_url: yoon5/bluegreen:$version
+  image: yoon5/bluegreen
   version: 0.0.3
   ns: helm
