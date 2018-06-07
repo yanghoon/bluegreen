@@ -21,7 +21,7 @@ Build Docker image:
 
 deploy:
 - kubectl:
-  - kubectl apply -n helm -f ./k8s/deploy.yaml
+  - kubectl apply -n helm -f ./k8s/deploy.yaml &&
   - kubectl apply -n helm -f ./k8s/service.yaml
 
 agent:
