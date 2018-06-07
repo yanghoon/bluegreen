@@ -12,7 +12,9 @@ stage:
 Build Docker image:
 - docker:
 #  - docker login -u *** -p ***
-  - docker build -t $env.img .
+  - echo '$image'
+  - echo '$env.image'
+  - docker build -t $env.image .
   - docker images
 #  - docker push yoon5/bluegreen:0.0.2
 #  - docker build -t private-docker-registry:5000/bluegreen:0.0.1 . &&
