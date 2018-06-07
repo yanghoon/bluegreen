@@ -4,14 +4,13 @@ stage:
 #- deploy
 
 build:
-- maven
-  - echo ${image_url}
-#  - mvn clean package -Dmaven.test.skip=true
+- maven: mvn clean package -Dmaven.test.skip=true
 
 Build Docker image:
 - docker:
 #  - docker login -u *** -p ***
-  - docker build -t $image:$version .
+  - docker build -t $image .
+  - docker iamges
 #  - docker push yoon5/bluegreen:0.0.2
 #  - docker build -t private-docker-registry:5000/bluegreen:0.0.1 . &&
 #  - docker push private-docker-registry:5000/bluegreen:0.0.1
@@ -30,7 +29,6 @@ agent:
       readOnly: false
 
 env:
-  image_url: yoon5/bluegreen:$version
-  image: yoon5/bluegreen
+  image: yoon5/bluegreen:$version
   version: 0.0.3
   ns: helm
