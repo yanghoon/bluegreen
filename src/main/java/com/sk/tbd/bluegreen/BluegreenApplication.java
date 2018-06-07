@@ -15,6 +15,6 @@ public class BluegreenApplication {
 	
 	@GetMapping("/home") 
 	public String home() {
-		return "{\"app\":\"Bluegreen\",\"data\":\"blue\"}";
+		return "{\"app\":\"Bluegreen\",\"data\":\"green\"}";
 	}
 }
