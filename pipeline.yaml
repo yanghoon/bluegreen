@@ -1,17 +1,17 @@
 stage:
 - build
-- Build Docker image
+#- Build Docker image
 #- deploy
 
 build:
-- maven: mvn clean package -Dmaven.test.skip=true
+- maven
+  - echo ${image_url}
+#  - mvn clean package -Dmaven.test.skip=true
 
 Build Docker image:
 - docker:
 #  - docker login -u *** -p ***
-  - echo ${image_url}
   - docker build -t $image:$version .
-  - docker images
 #  - docker push yoon5/bluegreen:0.0.2
 #  - docker build -t private-docker-registry:5000/bluegreen:0.0.1 . &&
 #  - docker push private-docker-registry:5000/bluegreen:0.0.1
