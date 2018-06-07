@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: bluegreen
-        image: earth1223/bluegreen:0.0.1
+        image: ssang276/bluegreen:0.0.1
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
