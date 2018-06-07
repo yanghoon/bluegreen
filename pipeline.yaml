@@ -4,8 +4,10 @@ stage:
 - deploy
 
 build:
-- maven:
-    goal: clean package
+- maven: |-
+    mvn clean package \
+      -Dmaven.test.skip=true
+#    goal: clean package
 
 Build Docker image:
 - docker:
