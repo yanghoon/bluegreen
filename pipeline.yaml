@@ -1,7 +1,7 @@
 stage:
 - build
-#- Build Docker image
-#- deploy
+- Build Docker image
+- deploy
 
 build:
 - maven: mvn clean package -Dmaven.test.skip=true
