@@ -1,1 +1,27 @@
+stage:
+- build
+- Build Docker image
+- deploy
 
+build:
+- maven:
+    goal: clean package
+
+Build Docker image:
+- docker:
+  - docker build -t ${} .
+#  - docker login ${} -u ${} -p${}
+#  - docker push ${}
+
+#deploy:
+#- kubectl:
+#  - kubectl apply -n helm -f ./k8s/deploy.yaml
+#  - kubectl apply -n helm -f ./k8s/service.yaml
+
+agent:
+  profile: [maven, docker, kubectl]
+  volumes:
+  - persistentVolumeClaim:
+      claimName: slave-workspace
+      mountPath: /root/.m2/repository
+      readOnly: false
