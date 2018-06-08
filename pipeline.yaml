@@ -8,10 +8,10 @@ build:
 
 Build Docker image:
 - docker:
-#  - docker login -u *** -p ***
+  - docker login -u *** -p ***
   - docker build -t $image .
   - docker images
-#  - docker push yoon5/bluegreen:0.0.2
+  - docker push yoon5/bluegreen:0.0.2
 #  - docker build -t private-docker-registry:5000/bluegreen:0.0.1 . &&
 #  - docker push private-docker-registry:5000/bluegreen:0.0.1
 
@@ -22,11 +22,11 @@ deploy:
 
 agent:
   profile: [maven, docker, kubectl]
-#  volumes:
-#  - persistentVolumeClaim:
-#      claimName: slave-workspace
-#      mountPath: /root/.m2/repository
-#      readOnly: false
+  volumes:
+  - persistentVolumeClaim:
+      claimName: slave-workspace
+      mountPath: /root/.m2/repository
+      readOnly: false
 
 env:
   image: yoon5/bluegreen:$version
