@@ -22,7 +22,7 @@ deploy:
 
 agent:
   profile: [maven, docker, kubectl]
-  cloud: kubernetes-dev
+  cloud: kubernetes
 #  volumes:
 #  - persistentVolumeClaim:
 #      claimName: slave-workspace
