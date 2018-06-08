@@ -1,2 +1,2 @@
 @Library('retrot') _
-heat()
+heat('xxx', 'pipeline.yml', 'pipeline.yaml')
