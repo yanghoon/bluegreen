@@ -22,11 +22,11 @@ deploy:
 
 agent:
   profile: [maven, docker, kubectl]
-  volumes:
-  - persistentVolumeClaim:
-      claimName: slave-workspace
-      mountPath: /root/.m2/repository
-      readOnly: false
+#  volumes:
+#  - persistentVolumeClaim:
+#      claimName: slave-workspace
+#      mountPath: /root/.m2/repository
+#      readOnly: false
 
 env:
   image: yoon5/bluegreen:$version
