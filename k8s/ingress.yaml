@@ -9,4 +9,4 @@ spec:
       paths:
       - backend:
           serviceName: bluegreen-service
-          servicePort: 8080
+          servicePort: 8100
