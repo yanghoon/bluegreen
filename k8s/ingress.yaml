@@ -2,11 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: bluegreen-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: app4retrot.ddns.net
     http:
       paths:
-      - backend:
+      - path: /ctx
+        backend:
           serviceName: bluegreen-service
           servicePort: 8100
