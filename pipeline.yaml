@@ -15,13 +15,11 @@ Build Docker image:
 
 deploy:
 - kubectl:
-  - kubectl apply -f ./k8s/deploy.yaml || kubectl create -f ./k8s/deploy.yaml
-  - kubectl apply -f ./k8s/service.yaml
+  - kubectl apply -n $ns -f ./k8s/deploy.yaml || kubectl create -n $ns -f ./k8s/deploy.yaml
+  - kubectl apply -n $ns -f ./k8s/service.yaml
 
 agent:
   profile: [maven, docker, kubectl]
-  namespace: helm
-  serviceAccount: default
 #  volumes:
 #  - pvc/slave-workspace: /root/.m2/repository
 #    readOnly: false
