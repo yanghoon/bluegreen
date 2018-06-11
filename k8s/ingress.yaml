@@ -7,6 +7,6 @@ spec:
   - host: app4retrot.ddns.net
     http:
       paths:
-      - background:
+      - backend:
           serviceName: bluegreen-service
           servicePort: 8080
