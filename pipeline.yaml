@@ -15,8 +15,7 @@ Build Docker image:
 
 deploy:
 - kubectl:
-  - kubectl apply -n $ns -f ./k8s/deploy.yaml
-  - kubectl apply -n $ns -f ./k8s/service.yaml
+  - kubectl apply -n $ns -f ./k8s
 
 agent:
   profile: [maven, docker, kubectl]
