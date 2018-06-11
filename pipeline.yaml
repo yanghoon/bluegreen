@@ -8,12 +8,10 @@ build:
 
 Build Docker image:
 - docker:
-  - docker login -u yoon5 -p didgns1!
   - docker build -t $image .
   - docker images
-  - docker push $image
-#  - docker build -t private-docker-registry:5000/bluegreen:0.0.1 . &&
-#  - docker push private-docker-registry:5000/bluegreen:0.0.1
+#  - docker login -u *** -p ***
+#  - docker push $image
 
 deploy:
 - kubectl:
