@@ -8,5 +8,5 @@ spec:
     http:
       paths:
       - background:
-        serviceName: bluegreen-service
-        servicePort: 8080
+          serviceName: bluegreen-service
+          servicePort: 8080
