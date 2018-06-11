@@ -20,6 +20,7 @@ deploy:
 
 agent:
   profile: [maven, docker, kubectl]
+  namespace: helm
 #  volumes:
 #  - pvc/slave-workspace: /root/.m2/repository
 #    readOnly: false
