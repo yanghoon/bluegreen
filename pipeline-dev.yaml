@@ -1,0 +1,13 @@
+stage:
+- build
+- deploy-dev
+
+build:
+- maven: mvn --version
+- docker: docker version
+
+deploy-dev:
+- kubectl: kubectl version
+
+agent:
+  profile: [maven, docker, kubectl]
