@@ -29,7 +29,7 @@ agent:
 env:
   maven:
     options2: -Dmaven.test.skip=${maven.test.skip} -X
-    options3: [-Dmaven.test.skip=${maven.test.skip}, -X]
+    options3: ['-Dmaven.test.skip=${maven.test.skip}', -X]
     goal: clean package
     test:
       skip: true
