@@ -1,0 +1,17 @@
+stage:
+- Build Docker Image
+
+Build Docker Image:
+- maven: mvn clean package ${options}
+- docker:
+  - docker build -t $image .
+# - docker push $image
+
+agent:
+  profile: [maven, docker]
+  volumes:
+  - persistentVolumeClaim: {claimName: test-maven-repo-pvc, mountPath: /root/.m2/repository, readOnly: false}
+
+env:
+  image: yoon5/bluegreen:0.0.2
+  options: -Dmaven.test.skip=true -V
