@@ -6,7 +6,7 @@ stage:
 build:
 - maven:  #mvn clean package -Dmaven.test.skip=true
     goal: ${maven.goal}
-    options: ${maven.options.*}
+    options: ${maven.options}
 
 Build Docker image:
 - docker:
@@ -36,6 +36,6 @@ env:
   ns: helm
   maven:
     goal: clean package
-    options: ['-Dmaven.test.skip=${maven.test.skip}', '-X']
+    options: -Dmaven.test.skip=${maven.test.skip} -X
     test:
       skip: true
