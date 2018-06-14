@@ -36,7 +36,6 @@ env:
   ns: helm
   maven:
     goal: clean package
-    options: ['-Dmaven.test.skip=${maven.skip.test}', '-X']
+    options: ['-Dmaven.test.skip=${maven.test.skip}', '-X']
     test:
       skip: true
-  
