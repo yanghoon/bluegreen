@@ -6,7 +6,7 @@ stage:
 build-1:
 - maven:
     goal: ${maven.goal}
-    options: -Dmaven.test.skip=${maven.test.skip} -X
+    options: -Dmaven.test.skip=${maven.test.skip} -V
 
 build-2:
 - maven:
@@ -28,8 +28,8 @@ agent:
 
 env:
   maven:
-    options2: -Dmaven.test.skip=${maven.test.skip} -X
-    options3: ['-Dmaven.test.skip=${maven.test.skip}', -X]
+    options2: -Dmaven.test.skip=${maven.test.skip} -V
+    options3: ['-Dmaven.test.skip=${maven.test.skip}', -V]
     goal: clean package
     test:
       skip: true
