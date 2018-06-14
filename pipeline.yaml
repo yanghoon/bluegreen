@@ -6,7 +6,7 @@ stage:
 build:
 - maven:  #mvn clean package -Dmaven.test.skip=true
     goal: clean package
-    options: -Dmaven.test.skip=${skip}
+    options: -Dmaven.test.skip=${skip.test}
 
 Build Docker image:
 - docker:
