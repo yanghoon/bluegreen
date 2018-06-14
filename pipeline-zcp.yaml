@@ -1,0 +1,27 @@
+stage: [build, Build Docker image, deploy]
+
+build:
+- maven: mvn clean package ${maven.options}
+
+Build Docker image:
+- docker:
+  - docker build -t $image .
+#  - docker login -u *** -p ***
+#  - docker push $image
+
+deploy:
+- kubectl: kubectl apply -n $ns -f ./k8s
+
+agent:
+  profile: [maven, docker, kubectl]
+  volumes:
+  - persistentVolumeClaim:
+      claimName: test-maven-repo-pvc
+      mountPath: /root/.m2/repository
+      readOnly: false
+
+env:
+  ns: helm
+  image: yoon5/bluegreen:0.0.2
+  maven:
+    options: -Dmaven.test.skip=true -V
