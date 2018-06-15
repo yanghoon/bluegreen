@@ -4,8 +4,7 @@ Build Maven:
 - maven: mvn clean package ${maven.options}
 
 Build Docker Image:
-- docker:
-  - docker build -t $image .
+- docker: docker build -t $image .
 #  - docker login -u *** -p ***
 #  - docker push $image
 
