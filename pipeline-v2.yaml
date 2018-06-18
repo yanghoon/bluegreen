@@ -14,6 +14,9 @@ Build 2:
     maven:
       goal: ${maven.goal}
       options: ${maven.options}
+- @maven maven:
+      goal: ${maven.goal}
+      options: ${maven.options}
 
 Build 3:
 - maven:
