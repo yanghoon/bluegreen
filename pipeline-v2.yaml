@@ -1,0 +1,40 @@
+stage:
+- Build 1
+- Build 2
+- Build 3: @maven
+
+Build 1:
+- @maven: mvn clean package -Dmaven.test.skip=true
+- @maven:
+    - mvn $maven.module_1
+    - mvn $maven.module_2
+
+Build 2:
+- @maven:
+    maven:
+      goal: ${maven.goal}
+      options: ${maven.options}
+
+Build 3:
+- maven:
+    goal: ${maven.goal}
+    options: ${maven.options}
+- mvn $maven.module_1
+- @maven-2: mvn $maven.module_1
+
+
+
+agent:
+  profile: [maven, docker, kubectl]
+  containers:
+  - name: maven-2
+    ...
+  volumes:
+  - {pvc/slave-workspace: /root/.m2/repository, readOnly: false}
+
+env:
+  maven:
+    goal: clean package
+    options: -Dmaven.test.skip=true
+    module_1: $maven.goal -P module_1 $maven.options
+    module_2: $maven.goal -P module_2 $maven.options
