@@ -23,23 +23,18 @@ Depoly to Prod:
 
 ## Configuration
 agent:
-  - name: slave1
-    profile: [maven, docker]
-    containers:
-    - name: ant
-      image: webratio/ant
-      command: cat
-    volumes:
-    - pvc/slave-workspace: /root/.m2/repository,
-      readOnly: false
-  - name: slave2
-    profile: [kubectl]
+  profile: [maven, docker, kubectl]
+  containers:
+  - name: ant
+    image: webratio/ant
+    command: cat
+  volumes:
+  - pvc/slave-workspace: /root/.m2/repository,
+    readOnly: false
 
 env:
-  @meta: {}
-  vars:
-    maven:
-      goal: clean package
-      options: -Dmaven.test.skip=true
-      module_1: $maven.goal -P module_1 $maven.options
-      module_2: $maven.goal -P module_2 $maven.options
+  maven:
+    goal: clean package
+    options: -Dmaven.test.skip=true
+    module_1: $maven.goal -P module_1 $maven.options
+    module_2: $maven.goal -P module_2 $maven.options
