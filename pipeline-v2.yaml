@@ -1,6 +1,7 @@
 stage:
 - Build 1
 - Build 2
+- Approval
 - Build 3: @maven
 
 Build 1:
@@ -18,12 +19,16 @@ Build 2:
       goal: ${maven.goal}
       options: ${maven.options}
 
+Approval:
+- input: Deploy to prod?
+
 Build 3:
 - maven:
     goal: ${maven.goal}
     options: ${maven.options}
 - mvn $maven.module_1
-- @maven-2: mvn $maven.module_1
+- @maven-2:
+  - mvn $maven.module_1
 
 
 
