@@ -1,0 +1,31 @@
+## Workflow
+stage:
+- Prepared
+- Build Artifact
+- Approval
+- Depoly to Prod
+
+## Stage
+Prepared:
+  - ant -buildfile assembly.xml dist
+Build Artifact:
+  - maven: {goal: ${maven.goal}, options: ${maven.options}}
+  - docker.build: {goal: ${maven.goal}, options: ${maven.options}}
+  - docker.push: {goal: ${maven.goal}, options: ${maven.options}}
+Approval:
+  - input: Deploy to prod?
+Depoly to Prod:
+  - kubectl.apply: {...}
+  - deploy.bluegreen: {...}
+
+## Configuration
+agent:
+  label: kube-slave
+  profile: [ant, maven, docker, kubectl]
+
+env:
+  maven:
+    goal: clean package
+    options: -Dmaven.test.skip=true
+    module_1: $maven.goal -P module_1 $maven.options
+    module_2: $maven.goal -P module_2 $maven.options
