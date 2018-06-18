@@ -1,0 +1,58 @@
+## Workflow
+stage:
+  @meta: {}
+  order:
+  - Prepared
+  - Build Artifact
+  - Approval
+  - Depoly to Prod
+
+## Stage
+Prepared:
+  @meta: {}
+  steps:
+  - @ant: ant -buildfile assembly.xml dist
+
+Build Artifact:
+  @meta:
+    agent.pod.name: slave1
+  steps:
+    - maven: {goal: ${maven.goal}, options: ${maven.options}}
+    - docker.build: {goal: ${maven.goal}, options: ${maven.options}}
+    - docker.push: {goal: ${maven.goal}, options: ${maven.options}}
+    # @maven maven: ...
+    # @docker docker.build: ...
+    # @docker docker.push: ...
+
+Approval:
+  @meta:
+    agent.pod.name: 
+  steps:
+    - input: Deploy to prod?
+
+Depoly to Prod:
+  @meta:
+    agent.pod.name: slave2
+  steps:
+    - kubectl.apply: {...}
+    - deploy.bluegreen: {...}
+
+## Configuration
+agent:
+  @meta:
+    type: kubernetes
+  pod:
+  - name: slave1
+    profile: [maven, docker]
+    volumes:
+    - {pvc/slave-workspace: /root/.m2/repository, readOnly: false}
+  - name: slave2
+    profile: [kubectl]
+env:
+  @meta: {}
+  vars:
+    maven:
+      goal: clean package
+      options: -Dmaven.test.skip=true
+      module_1: $maven.goal -P module_1 $maven.options
+      module_2: $maven.goal -P module_2 $maven.options
