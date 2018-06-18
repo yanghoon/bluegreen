@@ -11,11 +11,10 @@ Build 1:
     - mvn $maven.module_2
 
 Build 2:
-- @maven:
-    maven:
+- @maven mavenCmd:
       goal: ${maven.goal}
       options: ${maven.options}
-- @maven maven:
+- @docker dockerCmd.build:
       goal: ${maven.goal}
       options: ${maven.options}
 
