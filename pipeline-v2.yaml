@@ -1,34 +1,27 @@
 stage:
-- Build 1
-- Build 2
+- Prepared
+- Build Artifact
 - Approval
-- Build 3: @maven
+- Depoly to Prod
 
-Build 1:
-- @maven: mvn clean package -Dmaven.test.skip=true
-- @maven:
-    - mvn $maven.module_1
-    - mvn $maven.module_2
+Prepared:
+- @ant: ant -buildfile prod.xml dist
 
-Build 2:
-- @maven mavenCmd:
-      goal: ${maven.goal}
-      options: ${maven.options}
-- @docker dockerCmd.build:
-      goal: ${maven.goal}
-      options: ${maven.options}
+Build Artifact:
+- maven: {goal: ${maven.goal}, options: ${maven.options}}
+- docker.build: {goal: ${maven.goal}, options: ${maven.options}}
+- docker.push: {goal: ${maven.goal}, options: ${maven.options}}
+# @maven maven: ...
+# @docker docker.build: ...
+# @docker docker.push: ...
 
 Approval:
 - input: Deploy to prod?
+# @master/idle input: ...
 
-Build 3:
-- maven:
-    goal: ${maven.goal}
-    options: ${maven.options}
-- mvn $maven.module_1
-- @maven-2:
-  - mvn $maven.module_1
-
+Depoly to Prod:
+- kubectl.apply: {...}
+- deploy.bluegreen: {...}
 
 
 agent:
