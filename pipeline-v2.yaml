@@ -33,12 +33,12 @@ Build 3:
 
 
 agent:
-  profile: [maven, docker, kubectl]
-  containers:
-  - name: maven-2
-    ...
+- name: slave1
+  profile: [maven, docker]
   volumes:
   - {pvc/slave-workspace: /root/.m2/repository, readOnly: false}
+- name: slave2
+  profile: [kubectl]
 
 env:
   maven:
