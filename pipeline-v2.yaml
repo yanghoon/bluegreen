@@ -5,7 +5,7 @@ stage:
 - Depoly to Prod
 
 Prepared:
-- @ant: ant -buildfile prod.xml dist
+- @ant: ant -buildfile assembly.xml dist
 
 Build Artifact:
 - maven: {goal: ${maven.goal}, options: ${maven.options}}
@@ -16,8 +16,7 @@ Build Artifact:
 # @docker docker.push: ...
 
 Approval:
-- input: Deploy to prod?
-# @master/idle input: ...
+- @idle input: Deploy to prod?
 
 Depoly to Prod:
 - kubectl.apply: {...}
