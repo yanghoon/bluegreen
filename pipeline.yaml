@@ -35,7 +35,7 @@ agent:
 env:
   image: yoon5/bluegreen:$version
   version: 0.0.2
-  ns: test-jenkins-app
+  ns: zcp-system
   maven:
     goal: clean package
 #   options: -Dmaven.test.skip=${maven.test.skip} -X
