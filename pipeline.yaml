@@ -26,11 +26,11 @@ agent:
 #  volumes:
 #  - pvc/slave-workspace: /root/.m2/repository
 #    readOnly: false
-#  volumes:
-#  - persistentVolumeClaim:
-#      claimName: test-maven-repo-pvc
-#      mountPath: /root/.m2/repository
-#      readOnly: false
+  volumes:
+  - persistentVolumeClaim:
+      claimName: test-maven-repo-pvc
+      mountPath: /root/.m2/repository
+      readOnly: false
 
 env:
   image: yoon5/bluegreen:$version
