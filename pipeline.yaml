@@ -28,7 +28,7 @@ agent:
 #    readOnly: false
   volumes:
   - persistentVolumeClaim:
-      claimName: test-maven-repo-pvc
+      claimName: zcp-jenkins-mvn-repo
       mountPath: /root/.m2/repository
       readOnly: false
 
