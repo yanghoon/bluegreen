@@ -1,26 +1,34 @@
-stage: [Build Maven, Build Docker Image, Deploy to k8s]
+stage:
+- build
+- Build Docker image
+- deploy
 
-Build Maven:
-- maven: mvn clean package ${maven.options}
+build:
+- maven:
+    goal: ${maven.goal}
+    options: -Dmaven.test.skip=${maven.test.skip} -V
 
-Build Docker Image:
-- docker: docker build -t $image .
-#  - docker login -u *** -p ***
-#  - docker push $image
+Build Docker image:
+- docker:
+  - docker build -t $image .
 
-Deploy to k8s:
-- kubectl: kubectl apply -n $ns -f ./k8s
+deploy:
+- kubectl:
+  - kubectl apply -n $ns -f ./k8s
 
 agent:
   profile: [maven, docker, kubectl]
+  serviceAccount: zcp-jenkins
   volumes:
   - persistentVolumeClaim:
-      claimName: test-maven-repo-pvc
+      claimName: zcp-jenkins-mvn-repo
       mountPath: /root/.m2/repository
       readOnly: false
 
 env:
-  ns: helm
-  image: yoon5/bluegreen:0.0.2
+  image: yoon5/bluegreen:$version
+  version: 0.0.2
   maven:
-    options: -Dmaven.test.skip=true -V
+    goal: clean package
+    test:
+      skip: true
