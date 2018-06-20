@@ -5,7 +5,7 @@ import retort.agent.k8s.ContainerBuilder
 def builder = new ContainerBuilder(this)
 def config = """
 profile: [maven, docker, kubectl]
-volumes:
+volumes: 
 - empty:                  /root/.m2/repository    # https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/EmptyDirVolume.java#L48
   memory:   true
 - pvc:slave-workspace:    /root/volume/pvc        # https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/PersistentVolumeClaim.java#L45
