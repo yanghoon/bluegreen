@@ -1,23 +1,24 @@
 stage:
-- build
-- Build Docker image
-- deploy
+- Build (Maven)
+- Build (Docker)
+- Deploy (Kubernetes)
 
-build:
+Build (Maven):
 - maven:
     goal: clean package
     options: -Dmaven.test.skip=true -V
 
-Build Docker image:
+Build (Docker):
 - docker.build:
     tag: $image
 - docker.push:
     imageName: $image
     credentialId: docker-hub-hoon
 
-deploy:
-- kubectl:
-  - kubectl apply -n $ns -f ./k8s
+Deploy (Kubernetes):
+- kubectl.apply:
+    folder: k8s
+    namespace: $ns
 
 agent:
   profile: [maven, docker, kubectl]
