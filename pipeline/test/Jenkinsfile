@@ -1,5 +1,7 @@
 @Library('sail-lib@hoon') _
 
+import retort.agent.k8s.ContainerBuilder
+
 def builder = new ContainerBuilder(this)
 def config = """
 profile:[maven, docker, kubectl]
@@ -18,3 +20,4 @@ volumes:
 """
 
 println builder.extend(config).build()
+
