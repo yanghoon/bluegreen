@@ -19,7 +19,7 @@ Build (Docker):
 
 Deploy (Kubernetes):
 - kubectl.apply:
-    file: k8s
+    folder: k8s
     namespace: $ns
 
 ## Create dynamic slave running on Kubernetes
