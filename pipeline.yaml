@@ -12,6 +12,7 @@ Build Docker image:
 - docker.build:
     tag: $image
 - docker.push:
+    imageName: $image
     credentialId: docker-hub-hoon
 
 deploy:
