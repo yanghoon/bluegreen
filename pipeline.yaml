@@ -16,8 +16,10 @@ Build (Docker):
     credentialId: docker-hub-hoon
 
 Deploy (Kubernetes):
+- kubectl.delete:
+    file: k8s
 - kubectl.apply:
-    folder: k8s
+    file: k8s
     namespace: $ns
 
 agent:
