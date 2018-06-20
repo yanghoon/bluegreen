@@ -15,9 +15,10 @@ volumes:
 - nfs:slave-workspace:    /root/volume/nfs        # https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/NfsVolume.java#L46
   readOnly: true
 - secret:slave-workspace: /root/volume/secret     # https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/SecretVolume.java#L41
-- host:/mnt/test-volume:  /root/volume/host       #https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/HostPathVolume.java#L40
+- host:/mnt/test-volume:  /root/volume/host       # https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/HostPathVolume.java#L40
   readOnly: true
 """
+config = yaml.load(config)
 
 println builder.extend(config).build()
 
