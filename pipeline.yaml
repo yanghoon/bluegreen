@@ -12,7 +12,7 @@ Build Docker image:
 - docker.build:
     tag: $image
 - docker.push:
-    credentialId: docker-hub
+    credentialId: docker-hub-hoon
 
 deploy:
 - kubectl:
