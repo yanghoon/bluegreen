@@ -18,6 +18,7 @@ Build (Docker):
 Deploy (Kubernetes):
 - kubectl.delete:
     file: k8s
+    throwException: false
 - kubectl.apply:
     file: k8s
     namespace: $ns
