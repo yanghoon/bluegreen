@@ -4,18 +4,15 @@ stage:
 - deploy
 
 build:
-- maven:  #mvn clean package -Dmaven.test.skip=true
-    goal: ${maven.goal}
-    options: -Dmaven.test.skip=${maven.test.skip} -X
-#   options: ${maven.options}
-#   options: ${maven.options.join(' ')}
+- maven:
+    goal: clean package
+    options: -Dmaven.test.skip=true -V
 
 Build Docker image:
-- docker:
-  - docker build -t $image .
-  - docker images
-#  - docker login -u *** -p ***
-#  - docker push $image
+- docker.build:
+    tag: $image
+- docker.push:
+    credentialId: docker-hub
 
 deploy:
 - kubectl:
@@ -23,23 +20,11 @@ deploy:
 
 agent:
   profile: [maven, docker, kubectl]
-  serviceAccount: zcp-jenkins
   volumes:
   - pvc:slave-workspace: /root/.m2/repository
     readOnly: false
-#  volumes:
-#  - persistentVolumeClaim:
-#      claimName: zcp-jenkins-mvn-repo
-#      mountPath: /root/.m2/repository
-#      readOnly: false
 
 env:
   image: yoon5/bluegreen:$version
   version: 0.0.2
-  ns: zcp-system
-  maven:
-    goal: clean package
-#   options: -Dmaven.test.skip=${maven.test.skip} -X
-#   options: [-Dmaven.test.skip=${maven.test.skip}, -X]
-    test:
-      skip: true
+  ns: helm
