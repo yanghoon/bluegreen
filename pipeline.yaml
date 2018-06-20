@@ -1,8 +1,10 @@
+## Defind Pipeline Stages
 stage:
 - Build (Maven)
 - Build (Docker)
 - Deploy (Kubernetes)
 
+## Configure Steps of each stage
 Build (Maven):
 - maven:
     goal: clean package
@@ -20,12 +22,14 @@ Deploy (Kubernetes):
     file: k8s
     namespace: $ns
 
+## Create dynamic slave running on Kubernetes
 agent:
   profile: [maven, docker, kubectl]
   volumes:
   - pvc:test-maven-repo-pvc: /root/.m2/repository
     readOnly: false
 
+## Defind reusable variables in method arguments and shell script
 env:
   image: yoon5/bluegreen:$version
   version: 0.0.2
