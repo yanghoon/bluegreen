@@ -1,0 +1,59 @@
+## Workflow
+stage:
+- Checkout
+- Maven Build
+- Docker Build & Push
+- Deploy Green
+- Depoly to Prod
+
+## Stage
+Checkout:
+  - checkout scm
+
+Maven Build:
+  @maven:
+    - maven.version: {version: $VERSION}
+    - maven: {goal: $maven.goal}
+
+Docker Build & Push:
+  @docker:
+    - docker.build:
+        tag: $docker.tag
+        buildArgs:
+          file: $docker.jar
+    - docker.push:
+        tag: $docker.tag
+        registry: $docker.reg
+
+Deploy Green:
+  
+
+Approval:
+  @thread:
+  - input: Deploy to prod?
+
+Depoly to Prod:
+  @kubectl:
+    - kubectl.apply: {...}
+    - deploy.bluegreen: {...}
+
+## Configuration
+agent:
+  profile: [maven, docker, kubectl]
+  containers:
+  - {name: ant, image: webratio/ant, command: cat}
+  volumes:
+  - pvc/slave-workspace: /root/.m2/repository,
+    readOnly: false
+
+env:
+  VERSION: 0.0.2
+  docker:
+    reg: 169.56.99.56:30060
+    tag: ${docker.reg}/yoon5/bluegreen:${VERSION}
+    jar: bluegeen-${VERSION}.jar
+  maven:
+    goal: clean package
+    options: -Dmaven.test.skip=true
+    module_1: $maven.goal -P module_1 $maven.options
+    module_2: $maven.goal -P module_2 $maven.options
