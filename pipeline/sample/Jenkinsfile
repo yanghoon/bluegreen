@@ -1,0 +1,20 @@
+node{
+  stage('Build #1'){
+    echo "Build #1 Stage"
+    echo "Build Binary Artifact"
+  }
+  
+  stage('Build #2'){
+    echo "Build #2 Stage"
+    echo "Build Artifact for Cloud"
+    echo "Login and Push Artifact to Remote"
+  }
+  
+  stage("Approval"){
+    input "Go to next step?"
+  }
+  
+  stage("Deploy"){
+    echo "Deploy Artifact from Remote"
+  }
+}
